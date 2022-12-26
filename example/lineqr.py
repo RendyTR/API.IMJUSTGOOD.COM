@@ -2,7 +2,7 @@ from justgood import imjustgood
 
 api     = imjustgood("YOUR_APIKEY_HERE")
 data    = api.lineqr(
-    appName="CHROMEOS\t2.4.7\tChromeOS\t96",
+    appName="DESKTOPMAC\t7.13.2\tMac\t12.0",
     sysName="IMJUSTGOOD",
     cert=None
 )
