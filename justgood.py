@@ -3,39 +3,45 @@ import json, requests, threading
 class imjustgood(threading.Thread):
     def __init__(self, apikey):
         super(imjustgood, self).__init__()
-        self.host = "https://api.imjustgood.com"
+        self.host    = "https://api.imjustgood.com"
         self.headers = {
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) Chrome/51.0.2704.106",
-            "apikey": apikey
+            "Apikey": apikey
         }
+        self.apikey  = apikey
         self.session = requests.Session()
 
     def GoodJson(self, data):
-        return f"{json.dumps(data, indent=4, sort_keys=True)}"
+        return str(json.dumps(data, indent=4, sort_keys=True))
 
-    def Get(self, path, headers=None):
-        if headers:
-            headers = {**headers, **self.headers}
-        else:
+    def Get(self, path, headers=None, params=None):
+        if headers is None:
             headers = self.headers
-        req = json.loads(self.session.get(self.host+path, headers=headers).text)
-        if req["status"] != 200:
-           raise Exception(req["message"])
-        return req
+        else:
+            headers = {**headers, **self.headers}
+        response = self.session.get(self.host+path, headers=headers, params=params)
+        if response.status_code != 200:
+            raise Exception("ERROR API SYSTEM")
+        result = json.loads(response.text)
+        if result["status"] != 200:
+           raise Exception(result["message"])
+        return result
 
-    def Post(self, path, headers=None, data=None, files=None, djson=None):
-        if headers:
-            headers = {**headers, **self.headers}
-        else:
+    def Post(self, path, headers=None, data=None, files=None, isjson=None):
+        if headers is None:
             headers = self.headers
-        req = json.loads(self.session.post(self.host+path, headers=headers, data=data, files=files, json=djson).text)
-        if req["status"] != 200:
-           raise Exception(req["message"])
-        return req
+        else:
+            headers = {**headers, **self.headers}
+        response = self.session.post(self.host+path, headers=headers, data=data, files=files, json=isjson)
+        if response.status_code != 200:
+            raise Exception("ERROR API SYSTEM")
+        result = json.loads(response.text)
+        if result["status"] != 200:
+           raise Exception(result["message"])
+        return result
 
     def status(self):
-        apikey = self.headers['apikey']
-        return self.Get("/status?apikey="+apikey)
+        return self.Get("/status?apikey="+self.apikey)
 
     def youtube(self, query):
         return self.Get("/youtube="+query)
@@ -79,6 +85,12 @@ class imjustgood(threading.Thread):
     def twitterdl(self, url):
         return self.Get("/twitter/video?url="+url)
 
+    def snackvideo(self, url):
+        return self.Get("/snackvideo?url="+url)
+
+    def secreto(self, url):
+        return self.Get("/secreto?url="+url)
+
     def facebookdl(self, url):
         return self.Get("/facebook/video?url="+url)
 
@@ -121,17 +133,14 @@ class imjustgood(threading.Thread):
     def vagina(self):
         return self.Get("/vagina")
 
-    def meme(self, text1, text2, url):
-        return self.Get("/meme/"+text1+"/"+text2+"/url="+url)
-
     def movie(self, query):
         return self.Get("/movie="+query)
 
     def movie_quotes(self):
         return self.Get("/movie/quotes")
 
-    def cinema(self, city):
-        return self.Get("/cinema="+city)
+    def cinema(self, cityname):
+        return self.Get("/cinema="+cityname)
 
     def tinyurl(self, url):
         return self.Get("/tinyurl="+url)
@@ -155,9 +164,7 @@ class imjustgood(threading.Thread):
         return self.Get("/zodiac="+sign)
 
     def alquran(self):
-        path = self.host+"/alquran=list"
-        main = self.session.get(path, headers=self.headers)
-        return json.loads(main.text)
+        return self.Get("/alquran=list")
 
     def alquranQS(self, query):
         return self.Get("/alquran="+query)
@@ -165,11 +172,11 @@ class imjustgood(threading.Thread):
     def bible(self):
         return self.Get("/bible")
 
-    def adzan(self, city):
-        return self.Get("/adzan="+city)
+    def adzan(self, cityname):
+        return self.Get("/adzan="+cityname)
 
-    def cuaca(self, city):
-        return self.Get("/cuaca="+city)
+    def cuaca(self, cityname):
+        return self.Get("/cuaca="+cityname)
 
     def bmkg(self):
         return self.Get("/bmkg")
@@ -222,9 +229,6 @@ class imjustgood(threading.Thread):
     def screenshot(self, url):
         return self.Get("/screenshot?url="+url)
 
-    def imgurl(self, path):
-        return self.Post("/imgurl",files={"file": open(path,"rb")})
-
     def gif(self, query):
         return self.Get("/gif="+query)
 
@@ -240,21 +244,24 @@ class imjustgood(threading.Thread):
     def lineapp(self):
         return self.Get("/line")
 
-    def lineqr(self, appName="CHROMEOS\t2.4.7\tChromeOS\t96", sysName="IMJUSTGOOD", cert=None):
-        return self.Get("/lineqr", headers={"appName": appName, "sysName": sysName, "cert": cert})
+    def linestore(self, packageId):
+        return self.Get("/linestore?id="+packageId)
+
+    def lineqr(self, appName, sysName, cert):
+        headers = {"appName": appName, "sysName": sysName, "cert": cert}
+        return self.Get("/lineqr", headers=headers)
 
     def lineqrGetPin(self, path):
-        path = self.host+"/pin"+path[30:]
-        main = self.session.get(path, headers=self.headers)
-        return json.loads(main.text)
+        return self.Get("/pin"+path[30:])
 
     def lineqrGetToken(self, path):
-        path = self.host+"/token"+path[32:]
-        main = self.session.get(path, headers=self.headers)
-        return json.loads(main.text)
+        return self.Get("/token"+path[32:])
 
     def check_ip(self, query):
         return self.Get("/ip="+query)
+
+    def proxies(self):
+        return self.Get("/proxies")
 
     def BinaryEncode(self, query):
         return self.Get("/binary/text?q="+query)
@@ -274,24 +281,25 @@ class imjustgood(threading.Thread):
     def simisimi(self, query):
         return self.Get("/simisimi?text="+query)
 
+    def stamplist(self):
+        return self.Get("/stamplist")
+
+    def stamp(self, num, url):
+        return self.Get("/stamp?url="+url+"&num="+num)
+
+    def meme(self, text1, text2, url):
+        return self.Get("/meme/"+text1+"/"+text2+"/url="+url)
+
     def imagetext(self, query):
         return self.Get("/imgtext?text="+query)
 
-    def stamp(self, num, url):
-        return self.Get(f"/stamp?url={url}&num={num}")
-
-    def stamplist(self):
-        path = self.host+"/stamplist"
-        main = self.session.get(path, headers=self.headers)
-        return json.loads(main.text)
-
-    def fansign(self, num, text):
-        return self.Get(f"/fansign?text={text}&num={num}")
+    def imgurl(self, path):
+        file = {"file": open(path,"rb")}
+        return self.Post("/imgurl",files=file)
 
     def ascii(self,query):
-        path = self.host+"/ascii="+query
-        main = self.session.get(path, headers=self.headers)
-        return main.text.split("pre")[1][1:-2]
+        result = self.Get("/ascii="+query)
+        return result.text.split("pre")[1][1:-2]
 
     def customlink(self, label, url):
         return self.Get("/custom/make", headers={"label": label, "url": url})
