@@ -1,7 +1,7 @@
 from justgood import imjustgood
 
-api      =   imjustgood("INSERT_YOUR_APIKEY_HERE")
-data     =   api.lyric("faded")
+api      =  imjustgood("INSERT_YOUR_APIKEY_HERE")
+data     =  api.lyric("faded")
 print(data)
 
 # EXAMPLE GET CERTAIN ATTRIBUTES
