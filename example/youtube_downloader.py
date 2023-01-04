@@ -7,7 +7,7 @@ print(data)
 # EXAMPLE GET CERTAIN ATTRIBUTES
 result  = "Title : {}".format(data["result"]["title"])
 result += "\nAuthor : {}".format(data["result"]["author"])
-result += "\nDuration : {}".format(data["result"]["duration"])
+result += "\nDuratiOn : {}".format(data["result"]["duration"])
 result += "\nWatch : {}\n".format(data["result"]["watched"])
 result += "\nDesc :\n{}\n".format(data["result"]["description"])
 result += "\nThumb :\n{}\n".format(data["result"]["thumbnail"])
