@@ -7,6 +7,7 @@ print(data)
 # EXAMPLE GET PROFILE ATTRIBUTES
 
 picture  =  data["result"]["pictureUrl"]
+
 result   =  "Account Id : {}\n".format(data["result"]["accountId"])
 result  +=  "Username : {}\n".format(data["result"]["username"])
 result  +=  "Fullname : {}".format(data["result"]["fullname"])
@@ -55,6 +56,7 @@ if performances != []:
         video = data["result"]["mp4Url"]
 
 print(result)
+
 if audio is not None:
     print(audio)
 if video is not None:
