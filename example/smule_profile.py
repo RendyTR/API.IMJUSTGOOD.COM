@@ -6,8 +6,6 @@ print(data)
 
 # EXAMPLE GET PROFILE ATTRIBUTES
 
-picture  =  data["result"]["pictureUrl"]
-
 result   =  "Account Id : {}\n".format(data["result"]["accountId"])
 result  +=  "Username : {}\n".format(data["result"]["username"])
 result  +=  "Fullname : {}".format(data["result"]["fullname"])
@@ -18,6 +16,7 @@ result  +=  "Following : {}\n".format(data["result"]["following"])
 result  +=  "Recording : {}\n".format(data["result"]["recording"])
 result  +=  "VIP : {}\n".format(data["result"]["vip"])
 result  +=  "Verified : {}\n".format(data["result"]["verified"])
+result  +=  "Picture URL : {}\n".format(data["result"]["pictureUrl"])
 result  +=  "Profile URL : {}".format(data["result"]["profileUrl"])
 
 if data["result"]["post"] != []:
@@ -26,38 +25,31 @@ if data["result"]["post"] != []:
         title   = data["result"]["post"][i]["title"]
         result += "\n   {}. {}".format(number+1, title)
 
-print(picture, result)
+print(result)
 
 # EXAMPLE GET PERFORMANCES ATTRIBUTES
 
 select_num    =  1
-audio, video  =  None, None
-performances  =  data["result"]["post"]
 result        =  "Not found"
+performances  =  data["result"]["post"]
 
 if performances != []:
 
     main      =  performances[select_num-1]
-    cover     =  main["thumbnail"]
-    print(cover)
-
     data      =  api.smuledl(main["pageUrl"])
-    result    =  "Artist : {}\n".format(main["artist"])
-    result   +=  "Title : {}\n".format(main["title"])
-    result   +=  "Caption : {}\n".format(main["caption"])
-    result   +=  "Created : {}\n".format(main["created"])
-    result   +=  "Love : {}\n".format(main["loves"])
-    result   +=  "Gift : {}\n".format(main["gifts"])
-    result   +=  "Listen : {}\n".format(main["listens"])
-    result   +=  "Performs : {}\n".format(main["performances"])
-    result   +=  "Page URL : {}".format(main["pageUrl"])
-    audio     =  data["result"]["mp3Url"]
+
+    result    =  "Artist : {}\n".format(data["artist"])
+    result   +=  "Title : {}\n".format(data["title"])
+    result   +=  "Caption : {}\n".format(data["caption"])
+    result   +=  "Created : {}\n".format(data["created"])
+    result   +=  "Love : {}\n".format(data["loves"])
+    result   +=  "Gift : {}\n".format(data["gifts"])
+    result   +=  "Listen : {}\n".format(data["listens"])
+    result   +=  "Comment : {}\n".format(data["comments"])
+    result   +=  "Audio URL : {}".format(data["mp3Url"])
+
     if data["result"]["type"] == "video":
-        video = data["result"]["mp4Url"]
+        result +=  "\nVideo URL : {}".format(data["result"]["mp4Url"])
+    result     +=  "\nThumbnail URL : {}".format(data["thumbnail"])
 
 print(result)
-
-if audio is not None:
-    print(audio)
-if video is not None:
-    print(video)
