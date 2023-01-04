@@ -1,6 +1,6 @@
 from justgood import imjustgood
 
-api     = imjustgood("YOUR_APIKEY_HERE")
+api     = imjustgood("INSERT_YOUR_APIKEY_HERE")
 data    = api.youtubedl("https://youtu.be/POG1xVW-1jQ")
 print(data)
 
