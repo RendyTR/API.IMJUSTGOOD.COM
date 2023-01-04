@@ -8,5 +8,4 @@ print(data)
 
 result   =  "{}\n\n".format(data["result"]["title"])
 result  +=  "{}".format(data["result"]["chord"])
-
 print(result)
