@@ -28,7 +28,8 @@ pip3 install justgood
 pip3 install --upgrade justgood
 ```
 
-### Example
+### Documentation
+You need <a href="https://api.imjustgood.com/intro">apikey</a> to authenticate calling our program.<br>
 Here is how to use the module in your own python code. we choose <a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/instagram_post.py">instapost</a> media as an example.
 ```python
 from justgood import imjustgood
