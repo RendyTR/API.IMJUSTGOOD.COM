@@ -247,8 +247,17 @@ class imjustgood(threading.Thread):
     def linestore(self, packageId):
         return self.Get("/linestore?id="+packageId)
 
-    def lineqr(self, appName, sysName, cert):
-        headers = {"appName": appName, "sysName": sysName, "cert": cert}
+    def lineqr(
+        self,
+        appName="DESKTOPWIN\t7.13.2\tWindows\t10.0",
+        sysName="IMJUSTGOOD",
+        cert=None
+    ):
+        headers = {
+            "appName": appName,
+            "sysName": sysName,
+            "cert": cert
+        }
         return self.Get("/lineqr", headers=headers)
 
     def lineqrGetPin(self, path):
