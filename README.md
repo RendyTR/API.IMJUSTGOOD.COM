@@ -532,6 +532,11 @@ video https://scontent-iad3-2.cdninstagram.com/v/t50.2886-16/298161345_101969858
             <td>Active</td>
             <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/stamp_image.py">Example</a></td>
         </tr>
+        <tr>
+            <td>TextPro</td>
+            <td>Active</td>
+            <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/textpro.py">Example</a></td>
+        </tr>
     </tbody>
 </table>
 
