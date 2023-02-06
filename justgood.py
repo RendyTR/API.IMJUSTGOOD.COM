@@ -41,7 +41,8 @@ class imjustgood(threading.Thread):
         return result
 
     def status(self):
-        return self.Get("/status?apikey="+self.apikey)
+        params = {"apikey": self.apikey }
+        return self.Get("/status", params=params)
 
     def youtube(self, query):
         return self.Get("/youtube="+query)
@@ -83,19 +84,24 @@ class imjustgood(threading.Thread):
         return self.Get("/twitter="+username)
 
     def twitterdl(self, url):
-        return self.Get("/twitter/video?url="+url)
+        params = {"url": url }
+        return self.Get("/twitter/video", params=params)
 
     def snackvideo(self, url):
-        return self.Get("/snackvideo?url="+url)
+        params = {"url": url }
+        return self.Get("/snackvideo", params=params)
 
     def secreto(self, url):
-        return self.Get("/secreto?url="+url)
+        params = {"url": url }
+        return self.Get("/secreto", params=params)
 
     def facebookdl(self, url):
-        return self.Get("/facebook/video?url="+url)
+        params = {"url": url }
+        return self.Get("/facebook/video", params=params)
 
     def pinterest(self, url):
-        return self.Get("/pinterest?url="+url)
+        params = {"url": url }
+        return self.Get("/pinterest", params=params)
 
     def github(self, username):
         return self.Get("/github="+username)
@@ -227,7 +233,8 @@ class imjustgood(threading.Thread):
         return self.Get("/resi/"+query+"="+code)
 
     def screenshot(self, url):
-        return self.Get("/screenshot?url="+url)
+        params = {"url": url }
+        return self.Get("/screenshot", params=params)
 
     def gif(self, query):
         return self.Get("/gif="+query)
@@ -245,7 +252,8 @@ class imjustgood(threading.Thread):
         return self.Get("/line")
 
     def linestore(self, packageId):
-        return self.Get("/linestore?id="+packageId)
+        params = {"id": packageId }
+        return self.Get("/linestore", params=params)
 
     def lineqr(
         self,
@@ -273,34 +281,42 @@ class imjustgood(threading.Thread):
         return self.Get("/proxies")
 
     def BinaryEncode(self, query):
-        return self.Get("/binary/text?q="+query)
+        params = {"q": query }
+        return self.Get("/binary/text", params=params)
 
     def BinaryDecode(self, query):
-        return self.Get("/binary/digit?q="+query)
+        params = {"q": query }
+        return self.Get("/binary/digit", params=params)
 
     def B64Encode(self, query):
-        return self.Get("/base64/text?q="+query)
+        params = {"q": query }
+        return self.Get("/base64/text", params=params)
 
     def B64Decode(self, query):
-        return self.Get("/base64/code?q="+query)
+        params = {"q": query }
+        return self.Get("/base64/code", params=params)
 
     def fancy(self, query):
-        return self.Get("/fancy?text="+query)
+        params = {"text": query }
+        return self.Get("/fancy", params=params)
 
     def simisimi(self, query):
-        return self.Get("/simisimi?text="+query)
+        params = {"text": query }
+        return self.Get("/simisimi", params=params)
 
     def stamplist(self):
         return self.Get("/stamplist")
 
     def stamp(self, num, url):
-        return self.Get("/stamp?url="+url+"&num="+num)
+        params = {"url": url, "num": num }
+        return self.Get("/stamp", params=params)
 
     def meme(self, text1, text2, url):
         return self.Get("/meme/"+text1+"/"+text2+"/url="+url)
 
     def imagetext(self, query):
-        return self.Get("/imgtext?text="+query)
+        params = {"text": query }
+        return self.Get("/imgtext", params=params)
 
     def imgurl(self, path):
         file = {"file": open(path,"rb")}
@@ -314,7 +330,13 @@ class imjustgood(threading.Thread):
         return self.Get("/custom/make", headers={"label": label, "url": url})
 
     def watermark_image(self, imageUrl, iconUrl):
-        return self.Get("/watermark/image?image="+imageUrl+"&icon="+iconUrl)
+        params = {"image": imageUrl, "icon": iconUrl }
+        return self.Get("/watermark/image", params=params)
 
     def watermark_text(self, imageUrl, text):
-        return self.Get("/watermark/text?image="+imageUrl+"&text="+text)
+        params = {"image": imageUrl, "text": text }
+        return self.Get("/watermark/text", params=params)
+
+    def textpro(self, text1, text2=None, text3=None, effect="scifi"):
+        params = {"effect": effect, "text1": text1, "text2": text2, "text3": text3 }
+        return self.Get("/textpro", params=params)
