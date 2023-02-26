@@ -193,6 +193,11 @@ video https://scontent-iad3-2.cdninstagram.com/v/t50.2886-16/298161345_101969858
             <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/facebook_downloader.py">Example</a></td>
         </tr>
         <tr>
+            <td>Pinterest Search</td>
+            <td>Active</td>
+            <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/pinterest_search.py">Example</a></td>
+        </tr>
+        <tr>
             <td>Pinterest Downloader</td>
             <td>Active</td>
             <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/pinterest_downloader.py">Example</a></td>
@@ -251,6 +256,11 @@ video https://scontent-iad3-2.cdninstagram.com/v/t50.2886-16/298161345_101969858
             <td>Google Translate</td>
             <td>Active</td>
             <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/google_translate.py">Example</a></td>
+        </tr>
+        <tr>
+            <td>Google Place</td>
+            <td>Active</td>
+            <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/google_place.py">Example</a></td>
         </tr>
         <tr>
             <td>Random Proxies</td>
@@ -536,6 +546,26 @@ video https://scontent-iad3-2.cdninstagram.com/v/t50.2886-16/298161345_101969858
             <td>TextPro</td>
             <td>Active</td>
             <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/textpro.py">Example</a></td>
+        </tr>
+        <tr>
+            <td>PhotoHack</td>
+            <td>Active</td>
+            <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/photohack.py">Example</a></td>
+        </tr>
+        <tr>
+            <td>Gold Currency</td>
+            <td>Active</td>
+            <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/gold.py">Example</a></td>
+        </tr>
+        <tr>
+            <td>Crypto Currency</td>
+            <td>Active</td>
+            <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/crypto.py">Example</a></td>
+        </tr>
+        <tr>
+            <td>Remove Background</td>
+            <td>Active</td>
+            <td><a href="https://github.com/RendyTR/api.imjustgood.com/blob/main/example/removebg.py">Example</a></td>
         </tr>
     </tbody>
 </table>
