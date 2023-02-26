@@ -5,7 +5,7 @@ class imjustgood(threading.Thread):
         super(imjustgood, self).__init__()
         self.host    = "https://api.imjustgood.com"
         self.headers = {
-            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) Chrome/51.0.2704.106",
+            "User-Agent": "Mozilla/5.0 (X11; CrOS x86_64 8172.45.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.64 Safari/537.36",
             "Apikey": apikey
         }
         self.apikey  = apikey
@@ -27,12 +27,12 @@ class imjustgood(threading.Thread):
            raise Exception(result["message"])
         return result
 
-    def Post(self, path, headers=None, data=None, files=None, isjson=None):
+    def Post(self, path, headers=None, params=None, data=None, files=None, isjson=None):
         if headers is None:
             headers = self.headers
         else:
             headers = {**headers, **self.headers}
-        response = self.session.post(self.host+path, headers=headers, data=data, files=files, json=isjson)
+        response = self.session.post(self.host+path, headers=headers, params=params, data=data, files=files, json=isjson)
         if response.status_code != 200:
             raise Exception("ERROR API SYSTEM")
         result = json.loads(response.text)
@@ -101,6 +101,10 @@ class imjustgood(threading.Thread):
 
     def pinterest(self, url):
         params = {"url": url }
+        return self.Get("/pinterest", params=params)
+
+    def pinsearch(self, query):
+        params = {"search": query }
         return self.Get("/pinterest", params=params)
 
     def github(self, username):
@@ -190,6 +194,13 @@ class imjustgood(threading.Thread):
     def corona(self):
         return self.Get("/corona")
 
+    def gold(self):
+        return self.Get("/gold")
+
+    def crypto(self, code):
+        params = {"convert": code }
+        return self.Get("/crypto", params=params)
+
     def karir(self):
         return self.Get("/karir")
  
@@ -232,6 +243,9 @@ class imjustgood(threading.Thread):
     def resi(self, query, code):
         return self.Get("/resi/"+query+"="+code)
 
+    def courierCode(self):
+        return self.Get("/courier")
+
     def screenshot(self, url):
         params = {"url": url }
         return self.Get("/screenshot", params=params)
@@ -242,11 +256,18 @@ class imjustgood(threading.Thread):
     def search(self, query):
         return self.Get("/search="+query)
 
+    def place(self, query, region="id", language="id"):
+        params = {"query": query, "region": region, "language": language }
+        return self.Get("/place", params=params)
+
     def calc(self, query):
         return self.Get("/calc="+query)
 
     def language(self):
         return self.Get("/language/code")
+
+    def currencyCode(self):
+        return self.Get("/currency/code")
 
     def lineapp(self):
         return self.Get("/line")
@@ -259,14 +280,30 @@ class imjustgood(threading.Thread):
         self,
         appName="DESKTOPWIN\t7.13.2\tWindows\t10.0",
         sysName="IMJUSTGOOD",
-        cert=None
+        cert=None,
+        style=None,
+        size=None,
+        border=None,
+        background=None,
+        foreground=None,
+        path=None
     ):
         headers = {
             "appName": appName,
             "sysName": sysName,
             "cert": cert
         }
-        return self.Get("/lineqr", headers=headers)
+        params  = {
+            "style": style,
+            "size": size,
+            "border": border,
+            "background": background,
+            "foreground": foreground
+        }
+        if path is not None:
+            path = open(path, "rb")
+        file = {"logo": path }
+        return self.Post("/lineqr", headers=headers, params=params, files=file)
 
     def lineqrGetPin(self, path):
         return self.Get("/pin"+path[30:])
@@ -320,7 +357,13 @@ class imjustgood(threading.Thread):
 
     def imgurl(self, path):
         file = {"file": open(path,"rb")}
-        return self.Post("/imgurl",files=file)
+        return self.Post("/imgurl", files=file)
+
+    def removebg(self, imagepath, background=None):
+        if background is not None:
+            background = open(background, "rb")
+        file = {"photo": open(imagepath, "rb"), "background": background }
+        return self.Post("/removebg", files=file)
 
     def ascii(self,query):
         result = self.Get("/ascii="+query)
@@ -336,6 +379,11 @@ class imjustgood(threading.Thread):
     def watermark_text(self, imageUrl, text):
         params = {"image": imageUrl, "text": text }
         return self.Get("/watermark/text", params=params)
+
+    def photohack(self, path, text, effect="liputan6"):
+        params = {"effect": effect, "text": text }
+        file   = {"file": open(path, "rb") }
+        return self.Post("/photohack", params=params, files=file)
 
     def textpro(self, text1, text2=None, text3=None, effect="scifi"):
         params = {"effect": effect, "text1": text1, "text2": text2, "text3": text3 }
