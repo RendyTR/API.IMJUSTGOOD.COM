@@ -4,7 +4,13 @@ api   =  imjustgood("INSERT_YOUR_APIKEY_HERE")
 data  =  api.lineqr(
     appName="DESKTOPWIN\t7.13.2\tWindows\t10.0",
     sysName="IMJUSTGOOD",
-    cert=None
+    cert=None,
+    style=None, # 1 or 2 (int)
+    size=None, # 100 - 500 (int)
+    border=None, # 50 - 100 (int)
+    background=None, # hex color code (str) (e.g. #ffffff)
+    foreground=None, # hex color code (str) (e.g. #000000)
+    path=None # path of logo image
 )
 
 ipaddress  =  data["result"]["ip"]
